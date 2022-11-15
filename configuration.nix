@@ -184,7 +184,7 @@ in
 
   home-manager.users.teto = { pkgs, ... }: {
 
-  home.packages = with pkgs; [ lua neofetch mpd killall polybar dotnet-sdk_5 git gcc gdb gnumake zsh alacritty redshift xsel feh file ];
+  home.packages = with pkgs; [ ccls man-pages man-pages-posix lua neofetch mpd killall polybar dotnet-sdk_5 git gcc gdb gnumake zsh alacritty redshift xsel feh file ];
 
   programs.git = {
     enable = true;
@@ -201,4 +201,5 @@ in
       };
     };
  };
+
 }
