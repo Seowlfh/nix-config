@@ -1,14 +1,9 @@
 # Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
+
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
 
-let
-  unstableTarball =
-    fetchTarball
-      https://github.com/NixOs/nixpkgs-channels/archive/nixos-unstable.tar.gz;
-in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -53,8 +48,8 @@ in
   services.actkbd = {
     enable = true;
     bindings = [
-      { keys = [ 224 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/light -A 10"; }
-      { keys = [ 225 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/light -U 10"; }
+      { keys = [ 224 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/light -U 5"; }
+      { keys = [ 225 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/light -A 5"; }
     ];
   };
 
@@ -64,10 +59,11 @@ in
 
     desktopManager = {
       xterm.enable = false;
+      gnome.enable = true;
     };
 
     displayManager = {
-        defaultSession = "none+i3";
+        gdm.enable = true;
     };
 
     windowManager.i3 = {
@@ -117,10 +113,6 @@ in
     isNormalUser = true;
     description = "teto";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      firefox
-      thunderbird
-    ];
     shell = pkgs.zsh;
   };
 
@@ -131,30 +123,10 @@ in
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
    #  wget
       firefox
-      spotify  
-      discord
-      neovim
-      jetbrains.rider
+      thunderbird
   ];
-
-    variables = {
-      EDITOR = "nvim";
-      TERMINAL = "alacritty";
-    };
-    
-    pathsToLink = [ "/libexec" ];
-    shells = with pkgs; [ zsh ];
   };
-
-  nixpkgs.config = {
-    allowUnfree = true;
-    packageOverrides = pkgs: with pkgs; {
-      unstable = import unstableTarball {
-      	config = config.nixpkgs.config;
-      };
-    };
-  };
-
+  
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -181,25 +153,7 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
-
-  home-manager.users.teto = { pkgs, ... }: {
-
-  home.packages = with pkgs; [ ccls man-pages man-pages-posix lua neofetch mpd killall polybar dotnet-sdk_5 git gcc gdb gnumake zsh alacritty redshift xsel feh file ];
-
-  programs.git = {
-    enable = true;
-    userName = "Theo Gardet";
-    userEmail = "theo.gardet@epita.fr";
-  };
-
-  programs.zsh = {
-    enable = true;
-    oh-my-zsh = {
-      enable = true;
-      plugins = [ "git" ];
-      theme = "bureau";
-      };
-    };
- };
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.allowReboot = true;
 
 }
