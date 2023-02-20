@@ -4,8 +4,16 @@ My NixOs configuration ! For now, as I'm getting to know NixOs, it's just a dumb
 
 ## Installation
 
-First, you'll need to install [Home Manager](https://github.com/nix-community/home-manager) **as a Module** for NixOS. You can do this by following [this procedure](https://nix-community.github.io/home-manager/index.html#sec-install-nixos-module). Note, you only have to do the channel commands, as I already imported the module in my `configuration.nix`
+To get my config, clone it.
 
-Then, put this `configuration.nix` in your `/etc/nixos` folder, and then run a `sudo nixos-rebuild switch` (I believe).
+```
+https://github.com/Seowlfh/nix-config.git
+```
 
-Aaaand you're done !
+You also have to add the [Home Manager Channel](https://github.com/nix-community/home-manager). You can use these commands:
+
+```
+sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz home-manager
+sudo nix-channel --update
+```
+
