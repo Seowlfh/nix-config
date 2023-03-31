@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -55,6 +54,7 @@
 
   # Enable Virtualbox
   virtualisation.virtualbox.host.enable = true;
+  virtualisation.docker.enable = true;
   users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
   # Enable the X11 windowing system.
   services.xserver = {

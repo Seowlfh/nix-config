@@ -13,13 +13,17 @@ in
 
   # Packages that should be installed to the user profile
    packages = with pkgs; [ 
-     opera python310Packages.pyyaml python310Packages.jsonschema python310Packages.pytest pavucontrol unstable.anki obsidian vscode pipenv bintools meson ninja unstable.jetbrains.idea-ultimate scrot rofi picom spotify-tui cabal-install ghc haskell-language-server geoclue2 zsh-powerlevel10k spotify discord unstable.neovim ccls man-pages man-pages-posix lua neofetch mpd polybar  gdb gnumake xsel feh file unstable.jetbrains.rider unstable.dotnet-sdk_7 obs-studio
+     pavucontrol unstable.anki obsidian vscode pipenv bintools meson ninja unstable.jetbrains.idea-ultimate scrot rofi picom spotify-tui cabal-install ghc haskell-language-server geoclue2 zsh-powerlevel10k spotify discord unstable.neovim ccls man-pages man-pages-posix lua neofetch mpd polybar  gdb gnumake xsel feh file unstable.jetbrains.rider unstable.dotnet-sdk_7 obs-studio
+     (opera.overrideAttrs (oldAttrs: {
+        runtimeDependencies = oldAttrs.runtimeDependencies ++ [ vivaldi-ffmpeg-codecs ];
+    }))
 
      # Scala Development
      coursier
+     jetbrains.jdk
 
      # Java Development
-     maven
+     # maven
 
      # Neovim related Packages
      zathura
