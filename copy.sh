@@ -15,5 +15,5 @@ cp -r ~/.config/polybar home_manager
 cp -r ~/.config/polybar-themes home_manager
 
 # i3
-cp ~/.config/i3/config i3
-cp ~/.config/i3/wallpaper.jpg i3
+cp ~/.config/i3/config i3/
+cp ~/.config/i3/wallpaper.jpg i3/

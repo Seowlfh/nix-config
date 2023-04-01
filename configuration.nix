@@ -4,6 +4,7 @@
 
 { config, pkgs, ... }:
 {
+  nixpkgs.config.allowUnfree = true;
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -79,13 +80,10 @@
 	];
 	package = pkgs.i3-gaps;
     };
-  };
 
-  # Configure keymap in X11
-  services.xserver = {
     layout = "us";
-    xkbVariant = "";
-    xkbOptions = "caps:escape";
+    xkbVariant = "intl";
+    xkbOptions = "caps:swapescape";
   };
 
   # Enable CUPS to print documents.
