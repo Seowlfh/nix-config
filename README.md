@@ -10,10 +10,4 @@ To get my config, clone it.
 https://github.com/Seowlfh/nix-config.git
 ```
 
-You also have to add the [Home Manager Channel](https://github.com/nix-community/home-manager). You can use these commands:
-
-```
-sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-22.11.tar.gz home-manager
-sudo nix-channel --update
-```
-
+You also have to add the [Home Manager Channel](https://github.com/nix-community/home-manager). You can follow the [standalone installation procedure](https://nix-community.github.io/home-manager/index.html#sec-install-standalone)
