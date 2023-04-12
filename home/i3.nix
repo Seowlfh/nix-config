@@ -13,22 +13,17 @@ in
         "${mod}+Return"= "exec ${pkgs.alacritty}/bin/alacritty";
       };
 
-      #bars = [
-      #  {
-      #    position = "bottom";
-      #    statusCommand = "${pkgs.i3status-rust}/bin/i3status-rs ${./i3status-rust.toml}";
-      #  }
-      #];
-
       startup = [
         {
             command = "setxkbmap -option caps:swapescape";
             always = true;
         }
         {
-            command = "${pkgs.feh}/bin/feh --bg-scale wallpaper.png";
+            command = "i3-msg workspace 1";
             always = true;
         }
       ];
     };
+
+    extraConfig = "exec --no-startup-id --bg-scale ~/.config/nixpkgs/home/wallpaper.jpg";
 }
