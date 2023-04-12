@@ -25,6 +25,10 @@ in
             command = "setxkbmap -option caps:swapescape";
             always = true;
         }
+        {
+            command = "${pkgs.feh}/bin/feh --bg-scale wallpaper.png";
+            always = true;
+        }
       ];
     };
 }

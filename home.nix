@@ -11,7 +11,8 @@ in
     homeDirectory = "/home/teto";
 
     packages = with pkgs; [
-      unstable.neovim discord neofetch
+      unstable.neovim discord neofetch unstable.jetbrains.idea-ultimate unstable.jetbrains.rider bintools scrot spotify geoclue2 man-pages man-pages-posix gdb gnumake feh unstable.dotnet-sdk_7 coursier jetbrains.jdk zathura
+
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
     ];
 
@@ -38,6 +39,11 @@ in
   };
 
   fonts.fontconfig.enable = true;
+
+  services.redshift = {
+    enable = true;
+    provider = "geoclue2";
+  };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

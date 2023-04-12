@@ -102,6 +102,7 @@
       # vim
       firefox
     #  thunderbird
+      gcc # Dirty hack cause gcc collides with home-manager or smth
     ];
 
     shell = "${pkgs.zsh}/bin/zsh";
