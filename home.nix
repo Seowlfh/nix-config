@@ -1,19 +1,41 @@
 { config, pkgs, lib, ... }:
 
-let 
+let
   unstable = import <nixos-unstable> { config.allowUnfree = true; };
 in
 {
+  # imports = [
+  #   import ./home/email.nix
+  # ];
+
   nixpkgs.config.allowUnfree = true;
-  
+
   home = {
     username = "teto";
     homeDirectory = "/home/teto";
 
     packages = with pkgs; [
-      unstable.neovim discord neofetch unstable.jetbrains.idea-ultimate unstable.jetbrains.rider bintools scrot spotify geoclue2 man-pages man-pages-posix gdb gnumake feh unstable.dotnet-sdk_7 coursier jetbrains.jdk zathura
+      unstable.neovim discord neofetch unstable.jetbrains.idea-ultimate unstable.jetbrains.rider bintools scrot spotify man-pages man-pages-posix gdb gnumake feh unstable.dotnet-sdk_7 zathura latexrun xdotool pstree texlive.combined.scheme-full htop thunderbird unzip tree yarn hugo vscode-fhs nodejs tmux cmake valgrind python310 postman anki libreoffice file bat direnv xsel graphviz chromium electron slack
 
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
+
+      # Neovim's dep
+      ripgrep
+      clang-tools
+      bear
+
+      # C programming
+      criterion
+
+      # Haskell programming
+      unstable.ghc
+      cabal-install
+      stack
+
+      # LRE
+      coursier
+      jdk17_headless
+      gnuplot
     ];
 
     sessionVariables = {
@@ -40,10 +62,74 @@ in
 
   fonts.fontconfig.enable = true;
 
-  services.redshift = {
-    enable = true;
-    provider = "geoclue2";
-  };
+  # Compositor
+  services.picom.enable = true;
+
+  # Email configuration
+  # programs.mbsync.enable = true;
+  # programs.msmtp.enable = true;
+  # programs.notmuch = {
+  #   enable = true;
+  #   hooks = {
+  #       preNew = "mbsync --all";
+  #   };
+  # };
+  #
+  # accounts.email.accounts = {
+  #     outlook = {
+  #         address = "theo.gardet@epita.fr";
+  #         userName = "theo.gardet@epita.fr";
+  #         realName = "Théo Gardet";
+  #         mbsync =  {
+  #             enable = true;
+  #             create = "maildir";
+  #         };
+  #
+  #         msmtp.enable = true;
+  #         notmuch.enable = true;
+  #
+  #         primary = true;
+  #         signature = {
+  #             delimiter = "-- ";
+  #             text = ''
+  #                 Théo Gardet
+  #                 ING1 2025 - LRE - ACDC
+  #                 '';
+  #             showSignature = "append";
+  #         };
+  #
+  #         passwordCommand = "babobu";
+  #
+  #         flavor = "outlook.office365.com";
+  #     };
+  #
+  #     gmail_prologin = {
+  #         address = "theo.gardet@prologin.fr";
+  #         userName = "theo.gardet@prologin.fr";
+  #         realName = "Théo Gardet";
+  #         mbsync =  {
+  #             enable = true;
+  #             create = "maildir";
+  #         };
+  #
+  #         msmtp.enable = true;
+  #         notmuch.enable = true;
+  #
+  #         primary = false;
+  #         signature = {
+  #             delimiter = "-- ";
+  #             text = ''
+  #                 Théo Gardet
+  #                 ING1 2025 - LRE - ACDC
+  #                 '';
+  #             showSignature = "append";
+  #         };
+  #
+  #         passwordCommand = "babobu";
+  #
+  #         flavor = "gmail.com";
+  #     };
+  # };
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage

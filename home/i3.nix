@@ -1,6 +1,6 @@
 { pkgs , lib, ... }:
 
-let 
+let
   mod = "Mod4";
 in
 {
@@ -25,5 +25,5 @@ in
       ];
     };
 
-    extraConfig = "exec --no-startup-id --bg-scale ~/.config/nixpkgs/home/wallpaper.jpg";
+    extraConfig = "exec feh --no-startup-id --bg-scale ~/.config/nixpkgs/home/wallpaper.jpg";
 }
