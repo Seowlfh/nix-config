@@ -34,9 +34,6 @@ in
       coursier
       jdk17_headless
       gnuplot
-
-      # Fonts
-      terminus_font
   ];
 
 
