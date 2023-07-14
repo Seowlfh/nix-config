@@ -2,7 +2,6 @@
 
 let
   mod = "Mod4";
-
 in
 {
     enable = true;
@@ -23,6 +22,10 @@ in
             command = "systemctl --user restart polybar";
             always = true;
         }
+        {
+            command = "betterlockscreen -u ~/.config/home-manager/home/wallpaper.jpg";
+            always = true;
+        }
       ];
 
       gaps = {
@@ -31,6 +34,14 @@ in
       };
 
       window.titlebar = false;
+
+      keybindings = lib.mkOptionDefault {
+        "${mod}+Shift+m" = "exec ${pkgs.firefox}/bin/firefox";
+        # "${mod}+Shift+s" = "exec ${pkgs.spectacle}/bin/spectacle -r";
+
+        "${mod}+Shift+b" = "exec systemctl poweroff";
+        "${mod}+Shift+x" = "exec betterlockscreen -l blur";
+      };
 
       # This is not yet working
       colors = let

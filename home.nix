@@ -59,6 +59,7 @@ in
   programs.rofi = import ./home/rofi.nix { inherit pkgs; };
 
   services.polybar = import ./home/polybar.nix { inherit pkgs; };
+  services.betterlockscreen = import ./home/betterlockscreen.nix { inherit pkgs; };
 
   programs.git = {
     enable = true;
