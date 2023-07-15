@@ -34,6 +34,9 @@ in
       coursier
       jdk17_headless
       gnuplot
+
+      # Utils
+      xclip
   ];
 
 

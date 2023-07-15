@@ -13,6 +13,11 @@ in
 
       bars = [];
 
+      fonts = {
+        names = [ "FiraCode Nerd Font" ];
+        size = 9.0;
+      };
+
       startup = [
         {
             command = "i3-msg workspace 1";
@@ -37,10 +42,10 @@ in
 
       keybindings = lib.mkOptionDefault {
         "${mod}+Shift+m" = "exec ${pkgs.firefox}/bin/firefox";
-        # "${mod}+Shift+s" = "exec ${pkgs.spectacle}/bin/spectacle -r";
-
         "${mod}+Shift+b" = "exec systemctl poweroff";
         "${mod}+Shift+x" = "exec betterlockscreen -l blur";
+        "--release ${mod}+Shift+s" = "exec scrot -s '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'";
+        "${mod}+Shift+f" = "exec scrot '/tmp/%F_%T_$wx$h.png' -e 'xclip -selection clipboard -target image/png -i $f'";
       };
 
       # This is not yet working
