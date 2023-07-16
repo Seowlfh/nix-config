@@ -23,7 +23,7 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-      unstable.neovim discord neofetch unstable.jetbrains.idea-ultimate scrot spotify man-pages man-pages-posix gdb gnumake feh zathura latexrun xdotool pstree texlive.combined.scheme-full htop thunderbird unzip tree vscode-fhs tmux cmake valgrind anki libreoffice file bat xsel slack pavucontrol gcc teams
+      unstable.neovim discord neofetch unstable.jetbrains.idea-ultimate scrot spotify man-pages man-pages-posix gdb gnumake feh zathura latexrun xdotool pstree htop thunderbird unzip tree vscode-fhs tmux cmake valgrind anki libreoffice file bat xsel slack pavucontrol gcc teams
 
       # Neovim's dep
       ripgrep
@@ -36,7 +36,10 @@ in
       gnuplot
 
       # Utils
-      xclip
+      xclip wget
+
+      # LSP
+      cmake-language-server
   ];
 
 
@@ -52,12 +55,14 @@ in
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
     EDITOR = "nvim";
-    TERMINAL = "alacritty";
+    TERMINAL = "kitty";
+    # TERMINAL = "alacritty";
   };
 
   xsession.windowManager.i3 = import ./home/i3.nix { inherit pkgs lib; };
 
-  programs.alacritty = import ./home/alacritty.nix { inherit pkgs; };
+  # programs.alacritty = import ./home/alacritty.nix { inherit pkgs; };
+  programs.kitty = import ./home/kitty.nix { inherit pkgs; };
   programs.zsh = import ./home/zsh.nix { inherit pkgs lib; };
   programs.rofi = import ./home/rofi.nix { inherit pkgs; };
 
