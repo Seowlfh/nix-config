@@ -1,6 +1,5 @@
 { pkgs, ...}:
-{
-  enable = true;
+{ enable = true;
 
   package = pkgs.polybar.override {
     alsaSupport = true;
@@ -17,6 +16,24 @@
         primary = "#43a047";
         secondary = "#43a047";
         alternate = "#FFFFFF";
+
+        white = "#FFFFFF";
+        black = "#000000";
+        red = "#EC7875";
+        pink = "#EC407A";
+        purple = "#BA68C8";
+        blue = "#42A5F5";
+        cyan = "#4DD0E1";
+        teal = "#00B19F";
+        green = "#61C766";
+        lime = "#B9C244";
+        yellow = "#FDD835";
+        amber = "#FBC02D";
+        orange = "#E57C46";
+        brown = "#AC8476";
+        indigo = "#6C77BB";
+        gray = "#9E9E9E";
+        blue-gray = "#6D8895";
     };
   in {
     "global/wm" = {
@@ -35,7 +52,7 @@
         height = 34;
 
         offset-x = "1%";
-        offset-y = "2%";
+        offset-y = "2%:-2";
 
         background = color.background;
         foreground = color.foreground;
@@ -57,9 +74,9 @@
         font-0 = "Terminus:size=10;3";
         font-1 = "waffle:size=10;3";
 
-        modules-left = "launcher workspaces";
-        modules-center = "";
-        modules-right = "updates alsa backlight battery network date sysmenu";
+        modules-left = "launcher workspaces temperature cpu memory";
+        modules-center = "spotify";
+        modules-right = "filesystem alsa backlight battery network date sysmenu";
 
         separator = "";
 
@@ -75,6 +92,7 @@
         tray-background = color.background;
         tray-offset-x = 0;
         tray-offset-y = 0;
+        tray-padding = 0;
         tray-scale = "1.0";
 
         enable-ipc = true;
@@ -106,6 +124,36 @@
         pseudo-transparency = false;
     };
 
+    "module/temperature" = {
+        type = "internal/temperature";
+
+        interval = "0.5";
+
+        thermal-zone = 0;
+
+        hwmon-path = "/sys/devices/pci0000:00/0000:00:1c.0/0000:39:00.0/nvme/nvme0/hwmon0/temp2_input";
+
+        warn-temperature = 65;
+
+        units = true;
+
+        format = "<ramp> <label>";
+
+        format-warn = "<ramp> <label-warn>";
+
+        label = "%temperature-c%";
+
+        label-warn = "%temperature-c%";
+        label-warn-foreground = color.secondary;
+
+        ramp-0 = "";
+        ramp-1 = "";
+        ramp-2 = "";
+        ramp-3 = "";
+        ramp-4 = "";
+        ramp-foreground = color.red;
+    };
+
     "module/alsa" = {
         type = "internal/alsa";
 
@@ -132,6 +180,7 @@
         ramp-volume-2 = "";
         ramp-volume-3 = "";
         ramp-volume-4 = "";
+        ramp-volume-foreground = color.green;
 
         ramp-headphones-0 = "";
     };
@@ -150,6 +199,7 @@
         ramp-2 = "";
         ramp-3 = "";
         ramp-4 = "";
+        ramp-foreground = color.gray;
     };
 
     "module/launcher" = {
@@ -200,6 +250,54 @@
         label-empty-padding = 2;
     };
 
+    "module/cpu" = {
+        type = "internal/cpu";
+
+        interval = 1;
+
+        format = "<label>";
+        format-prefix = "";
+        format-prefix-foreground = color.yellow;
+
+        label = " %percentage%%";
+    };
+
+    "module/memory" = {
+        type = "internal/memory";
+
+        interval = 1;
+
+        format = "<label>";
+        format-prefix = "";
+        format-prefix-foreground = color.blue;
+
+        label = " %mb_used%";
+    };
+
+    "module/spotify" = {
+    };
+
+    "module/filesystem" = {
+        type = "internal/fs";
+
+        mount-0 = "/";
+
+        interval = 30;
+
+        fixed-values = true;
+
+        format-mounted = "<label-mounted>";
+        format-mounted-prefix = "";
+        format-mounted-prefix-foreground = color.blue-gray;
+
+        format-unmounted = "<label-unmounted>";
+        format-unmounted-prefix = "";
+
+        label-mounted = " %free%";
+
+        label-unmounted = " %mountpoint%: not mounted";
+    };
+
     "module/battery" = {
         type = "internal/battery";
 
@@ -217,6 +315,7 @@
 
         format-full = "<label-full>";
         format-full-prefix = " ";
+        format-full-prefix-foreground = color.yellow;
 
         label-charging = "%percentage%%";
 
@@ -229,6 +328,7 @@
         ramp-capacity-2 = "";
         ramp-capacity-3 = "";
         ramp-capacity-4 = "";
+        ramp-foreground = color.yellow;
 
         animation-charging-0 = "";
         animation-charging-1 = "";

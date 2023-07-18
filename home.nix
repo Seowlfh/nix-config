@@ -23,7 +23,7 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-      unstable.neovim discord neofetch unstable.jetbrains.idea-ultimate scrot spotify man-pages man-pages-posix gdb gnumake feh zathura latexrun xdotool pstree htop thunderbird unzip tree vscode-fhs tmux cmake valgrind anki libreoffice file bat xsel slack pavucontrol gcc teams
+      unstable.neovim discord neofetch unstable.jetbrains.idea-ultimate scrot spotify man-pages man-pages-posix gdb gnumake feh zathura latexrun xdotool pstree htop thunderbird unzip tree vscode-fhs tmux cmake valgrind anki libreoffice file bat xsel slack pavucontrol gcc teams vim tmux
 
       # Neovim's dep
       ripgrep
