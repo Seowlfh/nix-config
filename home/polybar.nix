@@ -9,12 +9,12 @@
 
   config = let
     color = {
-        background = "#1F1F1F";
+        background = "#2A2B28";
         foreground = "#FFFFFF";
         foreground-alt = "#8F8F8F";
         module-fg = "#FFFFFF";
         primary = "#43a047";
-        secondary = "#43a047";
+        secondary = "#751313";
         alternate = "#FFFFFF";
 
         white = "#FFFFFF";
@@ -34,6 +34,7 @@
         indigo = "#6C77BB";
         gray = "#9E9E9E";
         blue-gray = "#6D8895";
+        light-green = "#7EB36B";
     };
   in {
     "global/wm" = {
@@ -49,34 +50,30 @@
         fixed-center = true;
 
         width = "100%";
-        height = 34;
+        height = 30;
 
         offset-x = "1%";
-        offset-y = "2%:-2";
+        # offset-y = "2%:-2";
 
         background = color.background;
         foreground = color.foreground;
 
-        radius-top = "0.0";
-        radius-bottom = "0.0";
-
         line-size = 2;
         line-color = color.primary;
 
-        border-bottom-size = 2;
-        border-bottom-color = color.primary;
+        # border-bottom-size = 2;
+        # border-bottom-color = color.primary;
+        border-bottom-size = 0;
 
-        padding = 0;
+        padding = 1;
+        module-margin = 1;
 
-        module-margin-left = 2;
-        module-margin-right = 2;
+        font-1 = "JetBrainsMono Nerd Font:size=10;3";
+        font-0 = "icomoon-feather:size=10;3";
 
-        font-0 = "Terminus:size=10;3";
-        font-1 = "waffle:size=10;3";
-
-        modules-left = "launcher workspaces temperature cpu memory";
+        modules-left = "workspaces temperature cpu memory";
         modules-center = "spotify";
-        modules-right = "filesystem alsa backlight battery network date sysmenu";
+        modules-right = "filesystem alsa backlight battery network time date";
 
         separator = "";
 
@@ -86,27 +83,10 @@
 
         locale = "";
 
-        tray-position = "none";
-        tray-detached = false;
-        tray-maxsize = 16;
-        tray-background = color.background;
-        tray-offset-x = 0;
-        tray-offset-y = 0;
-        tray-padding = 0;
-        tray-scale = "1.0";
+        tray-position = "right";
+        tray-offset-x = -20;
 
         enable-ipc = true;
-
-        click-left = "";
-        click-middle = "";
-        click-right = "";
-        scroll-up = "";
-        scroll-down = "";
-        double-click-left = "";
-        double-click-middle = "";
-        double-click-right = "";
-        cursor-click = "";
-        cursor-scroll = "";
     };
 
     "settings" = {
@@ -144,14 +124,13 @@
         label = "%temperature-c%";
 
         label-warn = "%temperature-c%";
-        label-warn-foreground = color.secondary;
 
         ramp-0 = "";
         ramp-1 = "";
         ramp-2 = "";
         ramp-3 = "";
         ramp-4 = "";
-        ramp-foreground = color.red;
+        format-foreground = color.red;
     };
 
     "module/alsa" = {
@@ -173,14 +152,14 @@
         label-volume = "%percentage%%";
 
         label-muted = " Muted";
-        label-muted-foreground = color.foreground-alt;
 
         ramp-volume-0 = "";
         ramp-volume-1 = "";
         ramp-volume-2 = "";
         ramp-volume-3 = "";
         ramp-volume-4 = "";
-        ramp-volume-foreground = color.green;
+
+        format-foreground = color.gray;
 
         ramp-headphones-0 = "";
     };
@@ -202,52 +181,44 @@
         ramp-foreground = color.gray;
     };
 
-    "module/launcher" = {
-        type = "custom/text";
-        content = "";
-
-        content-background = color.primary;
-        content-foreground = color.module-fg;
-        content-padding = 2;
-
-        # click-left = "~/.config/polybar/docky/scripts/launcher.sh &";
-        # click-right = "~/.config/polybar/docky/scripts/color-switch.sh &";
-    };
-
     "module/workspaces" = {
         type = "internal/xworkspaces";
 
         pin-workspaces = true;
-
         enable-click = true;
-
         enable-scroll = false;
 
-        icon-0 = "1;";
-        icon-1 = "2;";
-        icon-default = "";
+        icon-0 = "1;1";
+        icon-1 = "2;2";
+        icon-2 = "3;3";
+        icon-3 = "4;4";
+        icon-4 = "5;5";
+        icon-5 = "6;6";
+        icon-6 = "7;7";
+        icon-7 = "8;8";
+        icon-8 = "9;9";
 
         format = "<label-state>";
         format-padding = 0;
 
         label-monitor = "%name%";
 
-        label-active = "%icon%";
+        label-active = "%name%";
         label-active-foreground = color.primary;
         label-active-overline = color.primary;
 
-        label-occupied = "%icon%";
+        label-occupied = "%name%";
         label-occupied-foreground = color.alternate;
 
-        label-urgent = "%icon%";
+        label-urgent = "%name%";
         label-urgent-foreground = color.secondary;
 
-        label-empty = "%icon%";
+        label-empty = "%name%";
 
-        label-active-padding = 2;
-        label-urgent-padding = 2;
-        label-occupied-padding = 2;
-        label-empty-padding = 2;
+        label-active-padding = 1;
+        label-urgent-padding = 1;
+        label-occupied-padding = 1;
+        label-empty-padding = 1;
     };
 
     "module/cpu" = {
@@ -257,7 +228,7 @@
 
         format = "<label>";
         format-prefix = "";
-        format-prefix-foreground = color.yellow;
+        format-foreground = color.yellow;
 
         label = " %percentage%%";
     };
@@ -269,9 +240,9 @@
 
         format = "<label>";
         format-prefix = "";
-        format-prefix-foreground = color.blue;
+        format-foreground = color.blue;
 
-        label = " %mb_used%";
+        label = " %gb_used%";
     };
 
     "module/spotify" = {
@@ -288,14 +259,9 @@
 
         format-mounted = "<label-mounted>";
         format-mounted-prefix = "";
-        format-mounted-prefix-foreground = color.blue-gray;
-
-        format-unmounted = "<label-unmounted>";
-        format-unmounted-prefix = "";
+        format-foreground = color.blue-gray;
 
         label-mounted = " %free%";
-
-        label-unmounted = " %mountpoint%: not mounted";
     };
 
     "module/battery" = {
@@ -315,7 +281,7 @@
 
         format-full = "<label-full>";
         format-full-prefix = " ";
-        format-full-prefix-foreground = color.yellow;
+        format-foreground = color.yellow;
 
         label-charging = "%percentage%%";
 
@@ -328,7 +294,6 @@
         ramp-capacity-2 = "";
         ramp-capacity-3 = "";
         ramp-capacity-4 = "";
-        ramp-foreground = color.yellow;
 
         animation-charging-0 = "";
         animation-charging-1 = "";
@@ -361,30 +326,30 @@
         ramp-signal-2 = "";
     };
 
+    "module/time" = {
+        type = "internal/date";
+
+        interval = "1.0";
+
+        time = "%I:%M %p";
+
+        format = "<label>";
+        format-foreground = color.light-green;
+
+        label = "%time%";
+    };
+
     "module/date" = {
         type = "internal/date";
 
         interval = "1.0";
 
-        time = " %I:%M %p";
-
-        time-alt = " %a, %d %b %Y";
+        time = "%a, %d %b %Y";
 
         format = "<label>";
+        format-foreground = color.light-green;
 
         label = "%time%";
-    };
-
-    "module/sysmenu" = {
-        type = "custom/text";
-
-        content = "";
-
-        content-background = color.primary;
-        content-foreground = color.module-fg;
-        content-padding = 2;
-
-        click-left = "~/.config/polybar/docky/scripts/powermenu.sh &";
     };
   };
 }
