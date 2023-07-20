@@ -1,16 +1,18 @@
 { pkgs, ...}:
 { enable = true;
 
-  package = pkgs.polybar.override {
-    alsaSupport = true;
-  };
-
   script = "polybar -q -r main &";
 
   config = let
     color = {
-        background = "#2A2B28";
-        foreground = "#FFFFFF";
+        # old
+        # background = "#2A2B28";
+        # foreground = "#FFFFFF";
+
+        # test
+        background = "#1d2021";
+        foreground = "#ebdbb2";
+
         foreground-alt = "#8F8F8F";
         module-fg = "#FFFFFF";
         primary = "#43a047";
@@ -66,14 +68,17 @@
         border-bottom-size = 0;
 
         padding = 1;
-        module-margin = 1;
+        module-margin = 2;
 
-        font-1 = "JetBrainsMono Nerd Font:size=10;3";
-        font-0 = "icomoon-feather:size=10;3";
+        # font-1 = "JetBrainsMono Nerd Font:size=10;3";
+        # font-0 = "icomoon-feather:size=10;3";
+        font-0 = "Terminus:size=10;3";
+        font-1 = "waffle:size=10;3";
+        font-2 = "Iosevka Nerd Font:style=Medium:size=22;5";
 
         modules-left = "workspaces temperature cpu memory";
-        modules-center = "spotify";
-        modules-right = "filesystem alsa backlight battery network time date";
+        modules-center = "";
+        modules-right = "filesystem backlight battery network time";
 
         separator = "";
 
@@ -133,37 +138,6 @@
         format-foreground = color.red;
     };
 
-    "module/alsa" = {
-        type = "internal/alsa";
-
-        master-soundcard = "default";
-        speaker-soundcard = "default";
-        headphone-soundcard = "default";
-
-        master-mixer = "Master";
-
-        interval = 5;
-
-        format-volume = "<ramp-volume> <label-volume>";
-
-        format-muted = "<label-muted>";
-        format-muted-prefix = "";
-
-        label-volume = "%percentage%%";
-
-        label-muted = " Muted";
-
-        ramp-volume-0 = "";
-        ramp-volume-1 = "";
-        ramp-volume-2 = "";
-        ramp-volume-3 = "";
-        ramp-volume-4 = "";
-
-        format-foreground = color.gray;
-
-        ramp-headphones-0 = "";
-    };
-
     "module/backlight" = {
         type = "internal/backlight";
 
@@ -172,13 +146,13 @@
         format = "<ramp> <label>";
 
         label = "%percentage%%";
+        format-foreground = color.yellow;
 
         ramp-0 = "";
         ramp-1 = "";
         ramp-2 = "";
         ramp-3 = "";
         ramp-4 = "";
-        ramp-foreground = color.gray;
     };
 
     "module/workspaces" = {
@@ -215,10 +189,10 @@
 
         label-empty = "%name%";
 
-        label-active-padding = 1;
-        label-urgent-padding = 1;
-        label-occupied-padding = 1;
-        label-empty-padding = 1;
+        label-active-padding = 2;
+        label-urgent-padding = 2;
+        label-occupied-padding = 2;
+        label-empty-padding = 2;
     };
 
     "module/cpu" = {
@@ -245,9 +219,6 @@
         label = " %gb_used%";
     };
 
-    "module/spotify" = {
-    };
-
     "module/filesystem" = {
         type = "internal/fs";
 
@@ -259,7 +230,7 @@
 
         format-mounted = "<label-mounted>";
         format-mounted-prefix = "";
-        format-foreground = color.blue-gray;
+        format-mounted-foreground = color.blue-gray;
 
         label-mounted = " %free%";
     };
@@ -268,26 +239,32 @@
         type = "internal/battery";
 
         full-at = 82;
+        low-at = 20;
 
         battery = "BAT0";
         adapter = "AC";
 
-        poll-interval = 2;
+        poll-interval = 5;
 
         time-format = "%H:%M";
 
-        format-charging = "<animation-charging> <label-charging>";
-        format-discharging = "<ramp-capacity> <label-discharging>";
-
-        format-full = "<label-full>";
-        format-full-prefix = " ";
-        format-foreground = color.yellow;
-
         label-charging = "%percentage%%";
+        format-charging = "<animation-charging> <label-charging>";
+        format-charging-foreground = color.white;
+
 
         label-discharging = "%percentage%%";
+        format-discharging = "<ramp-capacity> <label-discharging>";
+        format-discharging-foreground = color.orange;
+
+        label-low = " %percentage%%";
+        format-low = "<label-low>";
+        format-low-foreground = color.red;
 
         label-full = "Full";
+        format-full = "<label-full>";
+        format-full-prefix = " ";
+        format-full-foreground = color.white;
 
         ramp-capacity-0 = "";
         ramp-capacity-1 = "";
@@ -306,16 +283,18 @@
         type = "internal/network";
         interface = "wlp0s20f3";
 
-        interval = "1.0";
+        interval = "3.0";
 
         accumulate-stats = true;
 
         unknown-as-up = true;
 
         format-connected = "<ramp-signal> <label-connected>";
+        format-connected-foreground = color.gray;
 
         format-disconnected = "<label-disconnected>";
         format-disconnected-prefix = "";
+        format-disconnected-foreground = color.gray;
 
         label-connected = "%{A1:networkmanager_dmenu &:}%essid%%{A}";
 
@@ -331,20 +310,7 @@
 
         interval = "1.0";
 
-        time = "%I:%M %p";
-
-        format = "<label>";
-        format-foreground = color.light-green;
-
-        label = "%time%";
-    };
-
-    "module/date" = {
-        type = "internal/date";
-
-        interval = "1.0";
-
-        time = "%a, %d %b %Y";
+        time = " %H:%M %D";
 
         format = "<label>";
         format-foreground = color.light-green;
