@@ -15,6 +15,10 @@
     }
   ];
 
+  dirHashes = {
+    cpp = "$HOME/yaka/cpp_workshop/";
+  };
+
   enableAutosuggestions = true;
 
   oh-my-zsh = {

@@ -23,23 +23,73 @@ in
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-      unstable.neovim discord neofetch unstable.jetbrains.idea-ultimate scrot spotify man-pages man-pages-posix gdb gnumake feh zathura latexrun xdotool pstree htop thunderbird unzip tree vscode-fhs tmux cmake valgrind anki libreoffice file bat xsel slack pavucontrol gcc teams vim tmux
+    unstable.neovim
+    discord
+    neofetch
+    unstable.jetbrains.idea-ultimate
+    scrot
+    spotify
+    man-pages
+    man-pages-posix
+    gdb
+    gnumake
+    feh
+    zathura
+    latexrun
+    xdotool
+    pstree
+    htop
+    thunderbird
+    unzip
+    tree
+    vscode-fhs
+    cmake
+    valgrind
+    anki
+    libreoffice
+    file
+    bat
+    xsel
+    slack
+    pavucontrol
+    gcc
+    vim
+    tmux
+    arandr
+    rustup
+    texliveFull
+    poetry
+    unstable.pre-commit
+    ocaml
+    opam
+    stack
+    cabal-install
+    ghc
 
-      # Neovim's dep
-      ripgrep
-      clang-tools
-      bear
+    # Neovim's dep
+    ripgrep
+    clang-tools
+    bear
 
-      # LRE
-      coursier
-      jdk17_headless
-      gnuplot
+    # Utils
+    xclip
+    wget
 
-      # Utils
-      xclip wget
+    # LSP
+    cmake-language-server # Cmake
+    nil # Nix
+    lua-language-server # Lua
+    texlab # LaTex
+    ocamlPackages.ocaml-lsp
+    haskell-language-server
+    dockerfile-language-server-nodejs
+    docker-compose-language-service
 
-      # LSP
-      cmake-language-server
+    # Formatters
+    nixpkgs-fmt
+    stylua
+
+    qemu
   ];
 
 
@@ -65,6 +115,7 @@ in
   programs.kitty = import ./home/kitty.nix { inherit pkgs; };
   programs.zsh = import ./home/zsh.nix { inherit pkgs lib; };
   programs.rofi = import ./home/rofi.nix { inherit pkgs; };
+  programs.tmux = import ./home/tmux.nix { inherit pkgs; };
 
   services.polybar = import ./home/polybar.nix { inherit pkgs; };
   services.betterlockscreen = import ./home/betterlockscreen.nix { inherit pkgs; };

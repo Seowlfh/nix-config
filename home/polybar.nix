@@ -1,10 +1,12 @@
-{ pkgs, ...}:
-{ enable = true;
+{ pkgs, ... }:
+{
+  enable = true;
 
   script = "polybar -q -r main &";
 
-  config = let
-    color = {
+  config =
+    let
+      color = {
         # old
         # background = "#2A2B28";
         # foreground = "#FFFFFF";
@@ -37,14 +39,15 @@
         gray = "#9E9E9E";
         blue-gray = "#6D8895";
         light-green = "#7EB36B";
-    };
-  in {
-    "global/wm" = {
+      };
+    in
+    {
+      "global/wm" = {
         margin-bottom = 0;
         margin-top = 0;
-    };
+      };
 
-    "bar/main" = {
+      "bar/main" = {
         monitor-strict = false;
 
         override-redirect = false;
@@ -92,9 +95,9 @@
         tray-offset-x = -20;
 
         enable-ipc = true;
-    };
+      };
 
-    "settings" = {
+      "settings" = {
         throttle-output = 5;
         throttle-output-for = 10;
 
@@ -107,9 +110,9 @@
         compositing-border = "over";
 
         pseudo-transparency = false;
-    };
+      };
 
-    "module/temperature" = {
+      "module/temperature" = {
         type = "internal/temperature";
 
         interval = "0.5";
@@ -136,9 +139,9 @@
         ramp-3 = "";
         ramp-4 = "";
         format-foreground = color.red;
-    };
+      };
 
-    "module/backlight" = {
+      "module/backlight" = {
         type = "internal/backlight";
 
         card = "intel_backlight";
@@ -153,9 +156,9 @@
         ramp-2 = "";
         ramp-3 = "";
         ramp-4 = "";
-    };
+      };
 
-    "module/workspaces" = {
+      "module/workspaces" = {
         type = "internal/xworkspaces";
 
         pin-workspaces = true;
@@ -193,9 +196,9 @@
         label-urgent-padding = 2;
         label-occupied-padding = 2;
         label-empty-padding = 2;
-    };
+      };
 
-    "module/cpu" = {
+      "module/cpu" = {
         type = "internal/cpu";
 
         interval = 1;
@@ -205,9 +208,9 @@
         format-foreground = color.yellow;
 
         label = " %percentage%%";
-    };
+      };
 
-    "module/memory" = {
+      "module/memory" = {
         type = "internal/memory";
 
         interval = 1;
@@ -217,9 +220,9 @@
         format-foreground = color.blue;
 
         label = " %gb_used%";
-    };
+      };
 
-    "module/filesystem" = {
+      "module/filesystem" = {
         type = "internal/fs";
 
         mount-0 = "/";
@@ -233,12 +236,12 @@
         format-mounted-foreground = color.blue-gray;
 
         label-mounted = " %free%";
-    };
+      };
 
-    "module/battery" = {
+      "module/battery" = {
         type = "internal/battery";
 
-        full-at = 82;
+        full-at = 100;
         low-at = 20;
 
         battery = "BAT0";
@@ -277,9 +280,9 @@
         animation-charging-2 = "";
 
         animation-charging-framerate = 750;
-    };
+      };
 
-    "module/network" = {
+      "module/network" = {
         type = "internal/network";
         interface = "wlp0s20f3";
 
@@ -303,9 +306,9 @@
         ramp-signal-0 = "";
         ramp-signal-1 = "";
         ramp-signal-2 = "";
-    };
+      };
 
-    "module/time" = {
+      "module/time" = {
         type = "internal/date";
 
         interval = "1.0";
@@ -316,6 +319,6 @@
         format-foreground = color.light-green;
 
         label = "%time%";
+      };
     };
-  };
 }

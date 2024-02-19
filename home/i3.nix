@@ -9,7 +9,7 @@ in
       modifier = mod;
 
       menu = "${pkgs.rofi}/bin/rofi -modi drun -show drun -show-icons";
-      terminal = "${pkgs.kitty}/bin/kitty";
+      terminal = "${pkgs.kitty}/bin/kitty tmux a";
 
       bars = [];
 
